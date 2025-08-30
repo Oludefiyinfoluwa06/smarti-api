@@ -3,7 +3,6 @@ import { Document, Schema, model } from "mongoose";
 export interface IAdmin extends Document {
   email: string;
   password: string;
-  role: "admin";
   createdAt: Date;
   updatedAt: Date;
 }
