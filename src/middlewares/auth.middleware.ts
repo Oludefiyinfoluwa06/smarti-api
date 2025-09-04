@@ -22,18 +22,18 @@ export async function requireAuth(req: AuthRequest, res: Response, next: NextFun
   try {
     const payload = verifyJwt<{ sub: string; }>(token);
 
-    const admin = await Admin.findById(payload.sub).select('-password __v');
+    const admin = await Admin.findById(payload.sub).lean();
+
+    const { password, ...adminData } = admin as any;
 
     if (!admin) {
       return res.status(401).json({ error: "Invalid token" });
     }
 
-    req.auth = {
-      _id: admin._id as Types.ObjectId,
-      email: admin.email,
-    };
+    req.auth = adminData;
+
     return next();
-  } catch (err) {
-    return res.status(401).json({ error: "Invalid or expired token" });
+  } catch (err: any) {
+    return res.status(401).json({ error: err.message || "Invalid or expired token" });
   }
 }
