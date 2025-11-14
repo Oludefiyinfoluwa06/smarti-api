@@ -58,7 +58,7 @@ export async function subscribeEmail(email: string, name?: string) {
     `;
     await sendEmail({
       purpose: "noreply",
-      from: process.env.NOREPLY_FROM_EMAIL,
+      from: process.env.NOREPLY_SMTP_USER,
       to: existing.email,
       subject: "Please confirm your subscription",
       html,
@@ -327,7 +327,7 @@ export async function subscribeEmail(email: string, name?: string) {
 
     await sendEmail({
       purpose: "noreply",
-      from: process.env.NOREPLY_FROM_EMAIL,
+      from: process.env.NOREPLY_SMTP_USER,
       to: existing.email,
       subject: "Welcome to Smarti Community",
       html,
@@ -358,7 +358,7 @@ export async function confirmSubscription(token: string) {
   // send welcome
   await sendEmail({
     purpose: "noreply",
-    from: process.env.NOREPLY_FROM_EMAIL,
+    from: process.env.NOREPLY_SMTP_USER,
     to: doc.email,
     subject: "Subscription confirmed",
     html: `<p>Thanks — your subscription is confirmed.</p><p>Unsubscribe: <a href="${BASE}/newsletter/unsubscribe?token=${doc.unsubToken}">Unsubscribe</a></p>`,

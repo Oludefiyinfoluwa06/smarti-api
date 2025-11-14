@@ -90,7 +90,7 @@ export async function sendNewsLetter(req: Request, res: Response) {
 
     await sendEmail({
       purpose: "newsletter",
-      from: process.env.NEWSLETTER_FROM_EMAIL,
+      from: process.env.NEWSLETTER_SMTP_USER,
       to: subscribersEmails,
       subject: newsLetter?.title!,
       html: newsLetter?.content,
