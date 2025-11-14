@@ -20,6 +20,7 @@ export interface IOrder extends Document {
   email: string;
   phone: string;
   address: string;
+  school?: string;
   packageItems: IPackageItem[];
   total: number;
   status: OrderStatus;
@@ -49,6 +50,7 @@ const OrderSchema = new Schema<IOrder>(
       default: "Pending",
     },
     orderId: { type: String, required: true },
+    school: { type: String, trim: true },
     paymentStatus: { type: String, enum: ["pending", "completed", "failed"], default: "pending" },
     paymentReference: { type: String },
   },

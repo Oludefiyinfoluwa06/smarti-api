@@ -18,6 +18,7 @@ export async function placeOrder(req: Request, res: Response) {
       email,
       phone,
       address,
+      school,
       packageItems,
       paymentReference,
       paymentStatus,
@@ -37,6 +38,10 @@ export async function placeOrder(req: Request, res: Response) {
 
     if (!address) {
       return res.status(400).json({ error: "Address is required" });
+    }
+
+    if (!school) {
+      return res.status(400).json({ error: "School is required" });
     }
 
     if (!packageItems) {
@@ -61,6 +66,7 @@ export async function placeOrder(req: Request, res: Response) {
       email,
       phone,
       address,
+      school,
       packageItems,
       paymentReference,
       paymentStatus,

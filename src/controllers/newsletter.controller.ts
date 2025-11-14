@@ -89,6 +89,8 @@ export async function sendNewsLetter(req: Request, res: Response) {
     subscribers.map((subscriber) => subscribersEmails.push(subscriber.email));
 
     await sendEmail({
+      purpose: "newsletter",
+      from: process.env.NEWSLETTER_SMTP_USER,
       to: subscribersEmails,
       subject: newsLetter?.title!,
       html: newsLetter?.content,
