@@ -3,7 +3,6 @@ dotenv.config();
 
 import express from "express";
 import cors from "cors";
-import serverless from "serverless-http";
 import { connectDB } from "./config/connectDB";
 import authRouter from "./routes/auth.route";
 import orderRouter from "./routes/orders.route";
@@ -34,4 +33,4 @@ app.use('/api/orders', orderRouter);
 app.use('/api/newsletter', newsLetterRouter);
 app.use('/api/newsletter/subscription', newsLetterSubscriptionRouter);
 
-export default serverless(app);
+export default app;

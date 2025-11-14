@@ -11,6 +11,7 @@ export interface CreateOrderInput {
   email: string;
   phone: string;
   address: string;
+  school?: string;
   packageItems: PackageItemInput[];
   paymentReference?: string | null;
   paymentStatus?: "pending" | "completed" | "failed";
@@ -40,6 +41,7 @@ export async function createOrder(input: CreateOrderInput): Promise<IOrder> {
     email: input.email,
     phone: input.phone,
     address: input.address,
+    school: input.school ?? undefined,
     packageItems: input.packageItems,
     total,
     orderId,
@@ -90,6 +92,7 @@ export function mapToAdminOrder(order: IOrder) {
     id: order._id,
     customer: order.customer,
     email: order.email,
+    school: (order as any).school ?? undefined,
     total: Number(order.total).toFixed(2),
     date: order.createdAt.toISOString(),
     status: order.status,
