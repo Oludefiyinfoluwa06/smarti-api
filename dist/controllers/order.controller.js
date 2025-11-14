@@ -20,7 +20,7 @@ function placeOrder(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         var _a;
         try {
-            const { customer, email, phone, address, packageItems, paymentReference, paymentStatus, } = req.body;
+            const { customer, email, phone, address, school, packageItems, paymentReference, paymentStatus, } = req.body;
             if (!customer) {
                 return res.status(400).json({ error: "Name is required" });
             }
@@ -32,6 +32,9 @@ function placeOrder(req, res) {
             }
             if (!address) {
                 return res.status(400).json({ error: "Address is required" });
+            }
+            if (!school) {
+                return res.status(400).json({ error: "School is required" });
             }
             if (!packageItems) {
                 return res.status(400).json({ error: "Please, select at least one package item" });
@@ -52,6 +55,7 @@ function placeOrder(req, res) {
                 email,
                 phone,
                 address,
+                school,
                 packageItems,
                 paymentReference,
                 paymentStatus,

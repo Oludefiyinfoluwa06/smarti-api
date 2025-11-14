@@ -97,6 +97,8 @@ function sendNewsLetter(req, res) {
             const subscribersEmails = [];
             subscribers.map((subscriber) => subscribersEmails.push(subscriber.email));
             yield (0, email_1.sendEmail)({
+                purpose: "newsletter",
+                from: process.env.NEWSLETTER_FROM_EMAIL,
                 to: subscribersEmails,
                 subject: newsLetter === null || newsLetter === void 0 ? void 0 : newsLetter.title,
                 html: newsLetter === null || newsLetter === void 0 ? void 0 : newsLetter.content,

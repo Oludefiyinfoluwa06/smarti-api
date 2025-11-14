@@ -30,7 +30,7 @@ function calculateTotalFromPackageItems(items) {
 }
 function createOrder(input) {
     return __awaiter(this, void 0, void 0, function* () {
-        var _a, _b;
+        var _a, _b, _c;
         if (!input.packageItems || input.packageItems.length === 0) {
             throw new Error("Please, select at least one package");
         }
@@ -41,11 +41,12 @@ function createOrder(input) {
             email: input.email,
             phone: input.phone,
             address: input.address,
+            school: (_a = input.school) !== null && _a !== void 0 ? _a : undefined,
             packageItems: input.packageItems,
             total,
             orderId,
-            paymentReference: (_a = input.paymentReference) !== null && _a !== void 0 ? _a : null,
-            paymentStatus: (_b = input.paymentStatus) !== null && _b !== void 0 ? _b : "pending",
+            paymentReference: (_b = input.paymentReference) !== null && _b !== void 0 ? _b : null,
+            paymentStatus: (_c = input.paymentStatus) !== null && _c !== void 0 ? _c : "pending",
             status: "Pending",
         });
         return order.save();
@@ -85,10 +86,12 @@ function updateOrderStatus(id, status) {
     });
 }
 function mapToAdminOrder(order) {
+    var _a;
     return {
         id: order._id,
         customer: order.customer,
         email: order.email,
+        school: (_a = order.school) !== null && _a !== void 0 ? _a : undefined,
         total: Number(order.total).toFixed(2),
         date: order.createdAt.toISOString(),
         status: order.status,

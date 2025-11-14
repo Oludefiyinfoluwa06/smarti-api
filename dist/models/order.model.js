@@ -19,6 +19,7 @@ const OrderSchema = new mongoose_1.Schema({
         default: "Pending",
     },
     orderId: { type: String, required: true },
+    school: { type: String, trim: true },
     paymentStatus: { type: String, enum: ["pending", "completed", "failed"], default: "pending" },
     paymentReference: { type: String },
 }, { timestamps: true });

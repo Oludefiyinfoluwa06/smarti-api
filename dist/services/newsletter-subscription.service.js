@@ -65,7 +65,13 @@ function subscribeEmail(email, name) {
       <p><a href="${confirmUrl}">Confirm subscription</a></p>
       <p>If you didn't sign up, ignore this email.</p>
     `;
-            yield (0, email_1.sendEmail)({ to: existing.email, subject: "Please confirm your subscription", html });
+            yield (0, email_1.sendEmail)({
+                purpose: "noreply",
+                from: process.env.NOREPLY_FROM_EMAIL,
+                to: existing.email,
+                subject: "Please confirm your subscription",
+                html,
+            });
         }
         else {
             const html = `
@@ -328,7 +334,13 @@ function subscribeEmail(email, name) {
       </body>
       </html>
     `;
-            yield (0, email_1.sendEmail)({ to: existing.email, subject: "Welcome to Smarti Community", html });
+            yield (0, email_1.sendEmail)({
+                purpose: "noreply",
+                from: process.env.NOREPLY_FROM_EMAIL,
+                to: existing.email,
+                subject: "Welcome to Smarti Community",
+                html,
+            });
         }
         return existing;
     });
@@ -354,6 +366,8 @@ function confirmSubscription(token) {
         yield doc.save();
         // send welcome
         yield (0, email_1.sendEmail)({
+            purpose: "noreply",
+            from: process.env.NOREPLY_FROM_EMAIL,
             to: doc.email,
             subject: "Subscription confirmed",
             html: `<p>Thanks — your subscription is confirmed.</p><p>Unsubscribe: <a href="${BASE}/newsletter/unsubscribe?token=${doc.unsubToken}">Unsubscribe</a></p>`,
