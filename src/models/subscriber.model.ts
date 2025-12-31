@@ -19,7 +19,6 @@ const SubscriberSchema = new Schema<ISubscriber>(
       type: String,
       required: true,
       lowercase: true,
-      index: true,
     },
     name: {
       type: String,
